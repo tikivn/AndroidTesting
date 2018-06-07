@@ -11,7 +11,6 @@ import vn.tiki.android.androidtesting.data.model.Resource
 import vn.tiki.android.androidtesting.data.model.Status.ERROR
 import vn.tiki.android.androidtesting.data.model.Status.LOADING
 import vn.tiki.android.androidtesting.data.model.Status.SUCCESS
-import vn.tiki.android.androidtesting.data.model.User
 import vn.tiki.android.androidtesting.data.repository.UserRepository
 import vn.tiki.android.androidtesting.util.isEmailAddress
 
@@ -24,7 +23,7 @@ class LoginViewModel(
   private val _username = MutableLiveData<String>()
   private val _password = MutableLiveData<String>()
   private val _submit = MutableLiveData<Any>()
-  private val _result: LiveData<Resource<User>> = _submit.switchMap {
+  private val _result: LiveData<Resource<String>> = _submit.switchMap {
     userRepository.login(_username.value!!, _password.value!!)
   }
 
@@ -38,7 +37,7 @@ class LoginViewModel(
 
   val submitButtonEnabled: LiveData<Boolean> = usernameError.map { it == null }
 
-  val signInError: LiveData<String> = _result.map {
+  val loginError: LiveData<String> = _result.map {
     if (it?.status == ERROR) {
       it.message
     } else {
@@ -48,7 +47,7 @@ class LoginViewModel(
 
   val submitting: LiveData<Boolean> = _result.map { it?.status == LOADING }
 
-  val signInSucceed: LiveData<Boolean> = _result.map { it?.status == SUCCESS }
+  val loginSucceed: LiveData<Boolean> = _result.map { it?.status == SUCCESS }
 
   internal fun setUsername(username: String) {
     _username.value = username

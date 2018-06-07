@@ -54,7 +54,7 @@ class LoginFragment : Fragment() {
         .nonNull()
         .observe(this, { isEnabled -> btSubmit.isEnabled = isEnabled })
 
-    viewModel.signInError
+    viewModel.loginError
         .observe(this, Observer { error ->
           tilPassword.error = error
         })
@@ -74,7 +74,7 @@ class LoginFragment : Fragment() {
           }
         })
 
-    viewModel.signInSucceed
+    viewModel.loginSucceed
         .filter { it ?: false }
         .observe(this, Observer {
           Toast.makeText(context, "Login Success", Toast.LENGTH_SHORT).show()
