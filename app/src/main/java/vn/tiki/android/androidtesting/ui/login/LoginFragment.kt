@@ -3,15 +3,21 @@ package vn.tiki.android.androidtesting.ui.login
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
 import android.os.Bundle
-import android.support.design.widget.TextInputLayout
 import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.EditText
+import android.widget.Toast
 import androidx.core.view.doAfterTextChanged
-import vn.tiki.android.androidtesting.R
+import androidx.lifecycle.filter
+import androidx.lifecycle.nonNull
+import androidx.lifecycle.observe
+import kotlinx.android.synthetic.main.login_fragment.btSubmit
+import kotlinx.android.synthetic.main.login_fragment.etPassword
+import kotlinx.android.synthetic.main.login_fragment.etUsername
+import kotlinx.android.synthetic.main.login_fragment.tilPassword
+import kotlinx.android.synthetic.main.login_fragment.tilUsername
+import vn.tiki.android.androidtesting.R.layout
 
 class LoginFragment : Fragment() {
 
@@ -20,20 +26,9 @@ class LoginFragment : Fragment() {
   }
 
   private lateinit var viewModel: LoginViewModel
-  private lateinit var tilEmail: TextInputLayout
-  private lateinit var etEmail: EditText
-  private lateinit var tilPassword: TextInputLayout
-  private lateinit var etPassword: EditText
-  private lateinit var btLogin: Button
 
   override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
-    val view = inflater.inflate(R.layout.login_fragment, container, false)
-    tilEmail = view.findViewById(R.id.tilEmail)
-    etEmail = view.findViewById(R.id.etEmail)
-    tilPassword = view.findViewById(R.id.tilPassword)
-    etPassword = view.findViewById(R.id.etPassword)
-    btLogin = view.findViewById(R.id.btLogin)
-    return view
+    return inflater.inflate(layout.login_fragment, container, false)
   }
 
   override fun onActivityCreated(savedInstanceState: Bundle?) {
@@ -46,14 +41,43 @@ class LoginFragment : Fragment() {
   }
 
   private fun bindInputs() {
-    etEmail.doAfterTextChanged { viewModel.setEmail(it.toString()) }
+    etUsername.doAfterTextChanged { viewModel.setUsername(it.toString()) }
     etPassword.doAfterTextChanged { viewModel.setPassword(it.toString()) }
-    btLogin.setOnClickListener { viewModel.submit() }
+    btSubmit.setOnClickListener { viewModel.submit() }
   }
 
   private fun bindOutputs() {
-    viewModel.invalidEmailError
-        .observe(this, Observer { tilEmail.error = it })
-    TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    viewModel.usernameError
+        .observe(this, Observer { tilUsername.error = it })
+
+    viewModel.submitButtonEnabled
+        .nonNull()
+        .observe(this, { isEnabled -> btSubmit.isEnabled = isEnabled })
+
+    viewModel.signInError
+        .observe(this, Observer { error ->
+          tilPassword.error = error
+        })
+
+    viewModel.submitting
+        .nonNull()
+        .observe(this, { submitting ->
+          if (submitting) {
+            etUsername.isEnabled = false
+            etPassword.isEnabled = false
+            btSubmit.isProgressEnabled = true
+          } else {
+            etUsername.isEnabled = true
+            etPassword.isEnabled = true
+            btSubmit.isProgressEnabled = false
+            btSubmit.isEnabled = viewModel.submitButtonEnabled.value ?: false
+          }
+        })
+
+    viewModel.signInSucceed
+        .filter { it ?: false }
+        .observe(this, Observer {
+          Toast.makeText(context, "Login Success", Toast.LENGTH_SHORT).show()
+        })
   }
 }

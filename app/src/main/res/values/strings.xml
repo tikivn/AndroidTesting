@@ -3,4 +3,5 @@
   <string name="hint_email">E-mail</string>
   <string name="hint_password">Password</string>
   <string name="login">Login</string>
+  <string name="email_is_invalid">Email is invalid</string>
 </resources>
