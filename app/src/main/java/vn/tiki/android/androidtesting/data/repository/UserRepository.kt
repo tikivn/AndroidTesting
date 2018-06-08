@@ -26,14 +26,6 @@ class UserRepository(
         localStorage.setAccessToken(item)
       }
 
-      override fun shouldFetch(data: String?): Boolean {
-        return data == null
-      }
-
-      override fun loadFromDb(): LiveData<String> {
-        return localStorage.getAccessToken()
-      }
-
       override fun createCall(): LiveData<ApiResponse<String>> {
         return apiServices.login(username, password)
       }
