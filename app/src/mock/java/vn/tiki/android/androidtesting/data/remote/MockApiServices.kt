@@ -32,7 +32,7 @@ class MockApiServices(private val appExecutors: AppExecutors) : ApiServices {
       if ("foo@gmail.com" == username && "bar" == password) {
         MOCK_TOKEN
       } else {
-        throw RuntimeException("email and password are not matched")
+        throw RuntimeException("Email and password are not matched")
       }
     }
   }
@@ -42,7 +42,7 @@ class MockApiServices(private val appExecutors: AppExecutors) : ApiServices {
     appExecutors.networkIO()
       .execute {
         // Mock request time
-        SystemClock.sleep(300)
+        SystemClock.sleep(200)
 
         val response = try {
           ApiResponse.create(Response.success(func()))
