@@ -4,6 +4,13 @@ apply plugin: 'kotlin-android'
 
 apply plugin: 'kotlin-android-extensions'
 
+apply plugin: 'kotlin-allopen'
+
+allOpen {
+  // allows mocking for classes w/o directly opening them for release builds
+  annotation 'vn.tiki.android.androidtesting.testing.OpenClass'
+}
+
 android {
   compileSdkVersion 27
   defaultConfig {
@@ -24,6 +31,10 @@ android {
     unitTests {
       includeAndroidResources = true
     }
+  }
+  sourceSets {
+    androidTest.java.srcDirs += "src/test-common/java"
+    test.java.srcDirs += "src/test-common/java"
   }
   flavorDimensions "type"
   productFlavors {
