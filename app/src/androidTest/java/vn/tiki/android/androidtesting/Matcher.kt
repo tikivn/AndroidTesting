@@ -33,7 +33,7 @@ internal class HasErrorTextMatcher @RemoteMsgConstructor internal constructor(
  * **Note:** View's error property can be `null`, to match against it use `
  * hasErrorText(nullValue(String.class)`
  */
-fun hasErrorText(stringMatcher: Matcher<String>): Matcher<View> {
+fun hasError(stringMatcher: Matcher<String>): Matcher<View> {
   return HasErrorTextMatcher(checkNotNull(stringMatcher))
 }
 
@@ -44,6 +44,6 @@ fun hasErrorText(stringMatcher: Matcher<String>): Matcher<View> {
  * **Note:** View's error property can be `null`, to match against it use `
  * hasErrorText(nullValue(String.class)`
  */
-fun hasErrorText(text: String?): Matcher<View> {
+fun hasError(text: String?): Matcher<View> {
   return HasErrorTextMatcher(Matchers.`is`(text))
 }
