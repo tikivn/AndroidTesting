@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="vn.tiki.android.androidtesting">
 
-  <application android:name="vn.tiki.android.androidtesting.MainApplication" />
+  <application>
+    <activity android:name="vn.tiki.android.androidtesting.testing.SingleFragmentActivity" />
+  </application>
 
 </manifest>
