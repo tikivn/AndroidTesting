@@ -25,6 +25,17 @@ android {
       includeAndroidResources = true
     }
   }
+  flavorDimensions "type"
+  productFlavors {
+    mock {
+      dimension "type"
+      versionNameSuffix "-mock"
+      applicationIdSuffix '.mock'
+    }
+    real {
+      dimension "type"
+    }
+  }
 }
 
 dependencies {
