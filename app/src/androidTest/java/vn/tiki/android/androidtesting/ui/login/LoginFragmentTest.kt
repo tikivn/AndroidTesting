@@ -16,7 +16,7 @@ import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.mockito.ArgumentMatchers.anyString
-import org.mockito.Mockito
+import org.mockito.Mockito.`when`
 import vn.tiki.android.androidtesting.R
 import vn.tiki.android.androidtesting.R.id
 import vn.tiki.android.androidtesting.R.string
@@ -34,7 +34,7 @@ class LoginFragmentTest {
   @JvmField
   val activityTestRule = ActivityTestRule(SingleFragmentActivity::class.java)
 
-  lateinit var mockedApiServices: ApiServices
+  private lateinit var mockedApiServices: ApiServices
 
   @Before
   fun setUp() {
@@ -68,7 +68,7 @@ class LoginFragmentTest {
 
   @Test
   fun loginError() {
-    Mockito.`when`(mockedApiServices.login(anyString(), anyString()))
+    `when`(mockedApiServices.login(anyString(), anyString()))
         .thenReturn(LiveDataX.just(ApiResponse.create(RuntimeException("Email and password are not matched"))))
     onView(withId(R.id.etUsername))
         .perform(replaceText("foo@tiki.vn"))
