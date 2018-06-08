@@ -4,6 +4,7 @@ import android.app.Activity
 import android.content.Context
 import android.support.v4.app.Fragment
 import vn.tiki.android.androidtesting.MainApplication
+import kotlin.LazyThreadSafetyMode.NONE
 
 class ObjectGraph {
 
@@ -14,7 +15,7 @@ class ObjectGraph {
   }
 
   @Suppress("UNCHECKED_CAST")
-  fun <T> get(clazz: Class<T>): Lazy<T> = lazy {
+  fun <T> get(clazz: Class<T>): Lazy<T> = lazy(NONE) {
     factories[clazz]?.invoke() as T ?: throw IllegalStateException("no Factory for $clazz")
   }
 }
@@ -25,9 +26,11 @@ inline fun <reified T> ObjectGraph.add(noinline factory: Factory<T>) = put(T::cl
 
 fun Context.objectGraph() = (applicationContext as MainApplication).objectGraph
 
-inline fun <reified T> Fragment.inject(): Lazy<T> = lazy {
+inline fun <reified T> Fragment.inject(): Lazy<T> = lazy(NONE) {
   val context: Context = context ?: throw IllegalStateException("Fragment.getContext() is null")
   context.objectGraph().get<T>()
 }
 
-inline fun <reified T> Activity.inject(): Lazy<T> = objectGraph().get()
+inline fun <reified T> Activity.inject(): Lazy<T> = lazy(NONE) {
+  objectGraph().get<T>()
+}
