@@ -1,6 +1,7 @@
 package vn.tiki.android.androidtesting.ui.login
 
 import android.arch.lifecycle.Observer
+import android.arch.lifecycle.ViewModelProvider
 import android.arch.lifecycle.ViewModelProviders
 import android.os.Bundle
 import android.support.v4.app.Fragment
@@ -18,12 +19,15 @@ import kotlinx.android.synthetic.main.login_fragment.etUsername
 import kotlinx.android.synthetic.main.login_fragment.tilPassword
 import kotlinx.android.synthetic.main.login_fragment.tilUsername
 import vn.tiki.android.androidtesting.R.layout
+import vn.tiki.android.androidtesting.di.inject
 
 class LoginFragment : Fragment() {
 
   companion object {
     fun newInstance() = LoginFragment()
   }
+
+  private val viewModelFactory: ViewModelProvider.Factory by inject()
 
   private lateinit var viewModel: LoginViewModel
 
@@ -33,7 +37,7 @@ class LoginFragment : Fragment() {
 
   override fun onActivityCreated(savedInstanceState: Bundle?) {
     super.onActivityCreated(savedInstanceState)
-    viewModel = ViewModelProviders.of(this).get(LoginViewModel::class.java)
+    viewModel = ViewModelProviders.of(this, viewModelFactory).get(LoginViewModel::class.java)
 
     bindInputs()
 
