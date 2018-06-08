@@ -9,10 +9,14 @@ import vn.tiki.android.androidtesting.data.remote.ApiResponse
 import vn.tiki.android.androidtesting.data.remote.ApiServices
 
 class UserRepository(
-    private val appExecutors: AppExecutors,
-    private val apiServices: ApiServices,
-    private val localStorage: LocalStorage
+  private val appExecutors: AppExecutors,
+  private val apiServices: ApiServices,
+  private val localStorage: LocalStorage
 ) {
+
+  fun getAccessToken(): LiveData<String> {
+    return localStorage.getAccessToken()
+  }
 
   fun login(username: String, password: String): LiveData<Resource<String>> {
     return object : NetworkBoundResource<String, String>(appExecutors) {
@@ -31,7 +35,6 @@ class UserRepository(
       override fun createCall(): LiveData<ApiResponse<String>> {
         return apiServices.login(username, password)
       }
-
     }.asLiveData()
   }
 }

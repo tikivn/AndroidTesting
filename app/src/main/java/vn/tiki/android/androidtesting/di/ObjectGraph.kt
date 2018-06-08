@@ -18,7 +18,6 @@ class ObjectGraph {
   }
 }
 
-
 inline fun <reified T> ObjectGraph.get(): T = get(T::class.java).value
 
 inline fun <reified T> ObjectGraph.add(noinline factory: Factory<T>) = put(T::class.java, factory)

@@ -60,5 +60,4 @@ class LoginViewModel(
   internal fun submit() {
     _submit.value = null
   }
-
 }

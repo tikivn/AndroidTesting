@@ -9,7 +9,6 @@ import vn.tiki.android.androidtesting.data.AppExecutors
 class MockApiServices(private val appExecutors: AppExecutors) : ApiServices {
 
   override fun getUser(username: String, accessToken: String) {
-
   }
 
   override fun login(username: String, password: String): LiveData<ApiResponse<String>> {
