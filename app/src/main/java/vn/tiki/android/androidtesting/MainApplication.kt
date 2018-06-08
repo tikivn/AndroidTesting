@@ -48,8 +48,9 @@ open class MainApplication : Application() {
         object : ViewModelProvider.Factory {
           @Suppress("UNCHECKED_CAST")
           override fun <T : ViewModel?> create(modelClass: Class<T>): T {
-            val viewModel = when {
+            val viewModel: ViewModel = when {
               modelClass.isAssignableFrom(LoginViewModel::class.java) -> LoginViewModel(context, get())
+              modelClass.isAssignableFrom(MainViewModel::class.java) -> MainViewModel(get())
               else -> throw IllegalArgumentException("unknown model class $modelClass")
             }
             return viewModel as T

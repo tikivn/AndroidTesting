@@ -20,6 +20,7 @@ import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.MediatorLiveData
 import android.support.annotation.MainThread
 import android.support.annotation.WorkerThread
+import androidx.lifecycle.LiveDataX
 import vn.tiki.android.androidtesting.data.model.Resource
 import vn.tiki.android.androidtesting.data.remote.ApiEmptyResponse
 import vn.tiki.android.androidtesting.data.remote.ApiErrorResponse
@@ -112,13 +113,15 @@ abstract class NetworkBoundResource<ResultType, RequestType>
   protected open fun processResponse(response: ApiSuccessResponse<RequestType>) = response.body
 
   @WorkerThread
-  protected abstract fun saveCallResult(item: RequestType)
+  protected open fun saveCallResult(item: RequestType) {
+    // ignore
+  }
 
   @MainThread
-  protected abstract fun shouldFetch(data: ResultType?): Boolean
+  protected open fun shouldFetch(data: ResultType?): Boolean = data == null
 
   @MainThread
-  protected abstract fun loadFromDb(): LiveData<ResultType>
+  protected open fun loadFromDb(): LiveData<ResultType> = LiveDataX.just(null)
 
   @MainThread
   protected abstract fun createCall(): LiveData<ApiResponse<RequestType>>

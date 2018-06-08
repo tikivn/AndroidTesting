@@ -1,5 +1,6 @@
 package vn.tiki.android.androidtesting.di
 
+import android.app.Activity
 import android.content.Context
 import android.support.v4.app.Fragment
 import vn.tiki.android.androidtesting.MainApplication
@@ -28,3 +29,5 @@ inline fun <reified T> Fragment.inject(): Lazy<T> = lazy {
   val context: Context = context ?: throw IllegalStateException("Fragment.getContext() is null")
   context.objectGraph().get<T>()
 }
+
+inline fun <reified T> Activity.inject(): Lazy<T> = objectGraph().get()

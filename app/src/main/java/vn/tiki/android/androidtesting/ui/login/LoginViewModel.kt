@@ -15,8 +15,8 @@ import vn.tiki.android.androidtesting.data.repository.UserRepository
 import vn.tiki.android.androidtesting.util.isEmailAddress
 
 class LoginViewModel(
-    context: Context,
-    userRepository: UserRepository
+  context: Context,
+  userRepository: UserRepository
 ) : ViewModel() {
 
   private val messageInvalidEmail by lazy { context.getString(R.string.email_is_invalid) }
