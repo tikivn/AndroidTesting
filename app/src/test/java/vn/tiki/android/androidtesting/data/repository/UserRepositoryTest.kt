@@ -12,9 +12,11 @@ import org.mockito.Mockito.`when`
 import org.mockito.Mockito.mock
 import org.mockito.Mockito.verify
 import retrofit2.Response
+import vn.tiki.android.androidtesting.data.InstantAppExecutors
 import vn.tiki.android.androidtesting.data.local.LocalStorage
 import vn.tiki.android.androidtesting.data.remote.ApiResponse
 import vn.tiki.android.androidtesting.data.remote.ApiServices
+import vn.tiki.android.androidtesting.testing.mock
 
 @RunWith(JUnit4::class)
 class UserRepositoryTest {
