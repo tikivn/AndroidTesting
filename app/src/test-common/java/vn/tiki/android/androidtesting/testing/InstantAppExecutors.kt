@@ -1,5 +1,6 @@
-package vn.tiki.android.androidtesting.data
+package vn.tiki.android.androidtesting.testing
 
+import vn.tiki.android.androidtesting.data.AppExecutors
 import java.util.concurrent.Executor
 
 class InstantAppExecutors : AppExecutors(instant, instant, instant) {
