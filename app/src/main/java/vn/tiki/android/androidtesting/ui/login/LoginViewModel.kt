@@ -5,6 +5,7 @@ import android.arch.lifecycle.MutableLiveData
 import android.arch.lifecycle.ViewModel
 import android.content.Context
 import androidx.lifecycle.map
+import androidx.lifecycle.mutableLiveData
 import androidx.lifecycle.switchMap
 import vn.tiki.android.androidtesting.R
 import vn.tiki.android.androidtesting.data.model.Resource
@@ -20,8 +21,8 @@ class LoginViewModel(
 ) : ViewModel() {
 
   private val messageInvalidEmail by lazy { context.getString(R.string.email_is_invalid) }
-  private val _username = MutableLiveData<String>()
-  private val _password = MutableLiveData<String>()
+  private val _username = mutableLiveData("")
+  private val _password = mutableLiveData("")
   private val _submit = MutableLiveData<Any>()
   private val _result: LiveData<Resource<String>> = _submit.switchMap {
     userRepository.login(_username.value!!, _password.value!!)

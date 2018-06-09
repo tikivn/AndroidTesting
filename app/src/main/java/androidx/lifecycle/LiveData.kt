@@ -2,6 +2,7 @@ package androidx.lifecycle
 
 import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.MediatorLiveData
+import android.arch.lifecycle.MutableLiveData
 import android.arch.lifecycle.Transformations
 import android.support.annotation.MainThread
 
@@ -28,6 +29,14 @@ fun <X> LiveData<X>.filter(predicate: (X?) -> Boolean): LiveData<X> {
 
 @MainThread
 fun <X, Y> LiveData<X>.switchMap(func: (X?) -> LiveData<Y>): LiveData<Y> = Transformations.switchMap(this, func)
+
+fun <T> mutableLiveData(initialValue: T? = null): MutableLiveData<T> {
+  val mutableLiveData = MutableLiveData<T>()
+  if (initialValue != null) {
+    mutableLiveData.value = initialValue
+  }
+  return mutableLiveData
+}
 
 object LiveDataX {
 
