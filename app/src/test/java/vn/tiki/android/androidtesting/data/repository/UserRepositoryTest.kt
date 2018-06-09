@@ -9,7 +9,6 @@ import org.junit.runner.RunWith
 import org.junit.runners.JUnit4
 import org.mockito.ArgumentMatchers.anyString
 import org.mockito.Mockito.`when`
-import org.mockito.Mockito.mock
 import org.mockito.Mockito.verify
 import retrofit2.Response
 import vn.tiki.android.androidtesting.data.local.LocalStorage
@@ -21,8 +20,8 @@ import vn.tiki.android.androidtesting.testing.mock
 @RunWith(JUnit4::class)
 class UserRepositoryTest {
 
-  private val mockedApiServices = mock(ApiServices::class.java)
-  private val mockedLocalStorage = mock(LocalStorage::class.java)
+  private val mockedApiServices = mock<ApiServices>()
+  private val mockedLocalStorage = mock<LocalStorage>()
   private val tested = UserRepository(InstantAppExecutors(), mockedApiServices, mockedLocalStorage)
 
   @Rule

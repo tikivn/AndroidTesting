@@ -18,8 +18,6 @@ import org.junit.runner.RunWith
 import org.mockito.ArgumentMatchers.anyString
 import org.mockito.Mockito.`when`
 import vn.tiki.android.androidtesting.R
-import vn.tiki.android.androidtesting.R.id
-import vn.tiki.android.androidtesting.R.string
 import vn.tiki.android.androidtesting.data.remote.ApiResponse
 import vn.tiki.android.androidtesting.data.remote.ApiServices
 import vn.tiki.android.androidtesting.di.get
@@ -44,25 +42,25 @@ class LoginFragmentTest {
 
   @Test
   fun invalidEmail() {
-    onView(withId(id.etUsername))
+    onView(withId(R.id.etUsername))
         .perform(replaceText("giang"), closeSoftKeyboard())
 
-    onView(withId(id.tilUsername))
-        .check(matches(hasError(activityTestRule.activity.getString(string.email_is_invalid))))
+    onView(withId(R.id.tilUsername))
+      .check(matches(hasError(activityTestRule.activity.getString(R.string.email_is_invalid))))
 
-    onView(withId(id.btSubmit))
+    onView(withId(R.id.btSubmit))
         .check(matches(Matchers.not(isEnabled())))
   }
 
   @Test
   fun validEmail() {
-    onView(withId(id.etUsername))
+    onView(withId(R.id.etUsername))
         .perform(replaceText("giang@tiki.vn"), closeSoftKeyboard())
 
-    onView(withId(id.tilUsername))
+    onView(withId(R.id.tilUsername))
         .check(matches(hasError(null)))
 
-    onView(withId(id.btSubmit))
+    onView(withId(R.id.btSubmit))
         .check(matches(isEnabled()))
   }
 
