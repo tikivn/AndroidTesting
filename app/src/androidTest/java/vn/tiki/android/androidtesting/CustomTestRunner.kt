@@ -3,6 +3,7 @@ package vn.tiki.android.androidtesting
 import android.app.Application
 import android.content.Context
 import android.support.test.runner.AndroidJUnitRunner
+import vn.tiki.android.androidtesting.testing.TestApp
 
 /**
  * Custom runner to disable dependency injection.
