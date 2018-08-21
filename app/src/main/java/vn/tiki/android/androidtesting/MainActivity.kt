@@ -35,7 +35,6 @@ class MainActivity : AppCompatActivity() {
         .observe(this) { fragment ->
           showFragment(fragment)
         }
-
     }
   }
 

@@ -7,8 +7,8 @@ import androidx.core.content.edit
 import vn.tiki.android.androidtesting.data.AppExecutors
 
 class LocalStorageImpl(
-    private val appExecutors: AppExecutors,
-    private val sharedPreferences: SharedPreferences
+  private val appExecutors: AppExecutors,
+  private val sharedPreferences: SharedPreferences
 ) : LocalStorage {
 
   companion object {

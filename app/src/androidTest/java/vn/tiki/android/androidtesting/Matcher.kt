@@ -25,7 +25,6 @@ internal class HasErrorTextMatcher @RemoteMsgConstructor internal constructor(
   }
 }
 
-
 /**
  * Returns a matcher that matches [TextInputLayout] based on edit text error string value.
  *

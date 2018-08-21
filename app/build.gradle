@@ -12,11 +12,11 @@ allOpen {
 }
 
 android {
-  compileSdkVersion 27
+  compileSdkVersion buildConfig.compileSdk
   defaultConfig {
     applicationId "vn.tiki.android.androidtesting"
-    minSdkVersion 21
-    targetSdkVersion 27
+    minSdkVersion buildConfig.minSdk
+    targetSdkVersion buildConfig.targetSdk
     versionCode 1
     versionName "1.0"
     testInstrumentationRunner "vn.tiki.android.androidtesting.CustomTestRunner"
@@ -28,11 +28,12 @@ android {
     }
   }
   testOptions {
+    // required by robolectric
     unitTests {
       includeAndroidResources = true
     }
   }
-  sourceSets {
+  sourceSets { // Add test-common to sourceSets
     androidTest.java.srcDirs += "src/test-common/java"
     test.java.srcDirs += "src/test-common/java"
   }
@@ -50,35 +51,40 @@ android {
 }
 
 dependencies {
-  def lifecycle_version = "1.1.1"
 
   implementation fileTree(dir: 'libs', include: ['*.jar'])
-  implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
-  implementation 'com.android.support:design:27.1.1'
-  implementation 'com.android.support:appcompat-v7:27.1.1'
-  implementation 'com.android.support.constraint:constraint-layout:1.1.1'
-  implementation "android.arch.lifecycle:extensions:$lifecycle_version"
-  implementation "androidx.core:core-ktx:0.3"
+  implementation deps.kotlin.std
+  implementation deps.kotlin.ktx
 
-  def retrofit_version = "2.4.0"
-  implementation "com.squareup.retrofit2:retrofit:$retrofit_version"
+  implementation deps.support.design
+  implementation deps.support.appcompat
 
-  testImplementation("android.arch.core:core-testing:$lifecycle_version", {
+  implementation deps.constraintLayout
+
+  implementation deps.lifecycle.extensions
+  implementation deps.retrofit.core
+
+  testImplementation(deps.lifecycle.coreTesting, {
     exclude group: 'com.android.support', module: 'support-compat'
     exclude group: 'com.android.support', module: 'support-annotations'
     exclude group: 'com.android.support', module: 'support-core-utils'
   })
-  testImplementation "junit:junit:4.12"
-  testImplementation "com.google.truth:truth:0.40"
-  testImplementation "org.robolectric:robolectric:3.8"
-  testImplementation "org.robolectric:shadows-supportv4:3.8"
-  testImplementation "org.mockito:mockito-core:2.18.3"
-  androidTestImplementation "com.google.truth:truth:0.40"
-  androidTestImplementation "org.mockito:mockito-android:2.18.3"
-  androidTestImplementation "com.android.support.test:runner:1.0.2"
-  androidTestImplementation "com.android.support.test.espresso:espresso-core:3.0.2"
-  androidTestImplementation "com.android.support.test.espresso:espresso-contrib:3.0.2"
-  androidTestImplementation 'com.android.support.test:runner:1.0.2'
-  androidTestImplementation 'com.android.support.test:rules:1.0.2'
-  androidTestImplementation("android.arch.core:core-testing:$lifecycle_version")
+
+  testImplementation deps.test.junit
+  testImplementation deps.test.truth
+  testImplementation deps.test.robolectric.core
+  testImplementation deps.test.robolectric.shadows
+  testImplementation deps.test.mockito
+
+  androidTestImplementation(deps.test.truth) {
+    exclude group: 'com.google.guava', module: 'guava'
+    exclude group: 'org.checkerframework', module: 'checker-compat-qual'
+    exclude group: 'org.checkerframework', module: 'checker-qual'
+  }
+  androidTestImplementation deps.test.mockitoAndroid
+  androidTestImplementation deps.supportTest.espressoCore
+  androidTestImplementation deps.supportTest.espressoContrib
+  androidTestImplementation deps.supportTest.runner
+  androidTestImplementation deps.supportTest.rules
+  androidTestImplementation(deps.lifecycle.coreTesting)
 }

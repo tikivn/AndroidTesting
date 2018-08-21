@@ -28,9 +28,9 @@ import java.util.concurrent.Executors
  * webservice requests).
  */
 open class AppExecutors(
-    private val diskIO: Executor = Executors.newSingleThreadExecutor(),
-    private val networkIO: Executor = Executors.newFixedThreadPool(3),
-    private val mainThread: Executor = MainThreadExecutor()
+  private val diskIO: Executor = Executors.newSingleThreadExecutor(),
+  private val networkIO: Executor = Executors.newFixedThreadPool(3),
+  private val mainThread: Executor = MainThreadExecutor()
 ) {
 
   fun diskIO(): Executor {

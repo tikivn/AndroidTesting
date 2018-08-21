@@ -18,7 +18,8 @@ class MockApiServices(private val appExecutors: AppExecutors) : ApiServices {
         User(
           "foo",
           "foo@gmail.com",
-          "started learning to code because of passion. Then I wrote code for a living. Now I'm writing code to create value for people. Later on, I will teach coding",
+          "started learning to code because of passion. Then I wrote code for a living. " +
+            "Now I'm writing code to create value for people. Later on, I will teach coding",
           "https://avatars0.githubusercontent.com/u/1658142?v=4"
         )
       } else {

@@ -19,9 +19,9 @@ internal fun Handler.postDelayedWithToken(runnable: Runnable, token: Any?, delay
 }
 
 inline fun Handler.repeat(
-    delayInMillis: Long,
-    token: Any? = null,
-    crossinline action: () -> Unit
+  delayInMillis: Long,
+  token: Any? = null,
+  crossinline action: () -> Unit
 ) {
   postDelayedWithToken(object : Runnable {
     override fun run() {

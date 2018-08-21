@@ -27,7 +27,7 @@ import android.widget.TextView
  * @see [TextWatcher.afterTextChanged]
  */
 fun TextView.doAfterTextChanged(
-    afterChanged: (Editable) -> Unit
+  afterChanged: (Editable) -> Unit
 ): TextWatcher = addTextChangedListener(afterChanged = afterChanged)
 
 /**
@@ -37,7 +37,7 @@ fun TextView.doAfterTextChanged(
  * @see [TextWatcher.beforeTextChanged]
  */
 fun TextView.doBeforeTextChanged(
-    beforeChanged: (s: CharSequence, start: Int, count: Int, after: Int) -> Unit
+  beforeChanged: (s: CharSequence, start: Int, count: Int, after: Int) -> Unit
 ): TextWatcher = addTextChangedListener(beforeChanged = beforeChanged)
 
 /**
@@ -47,7 +47,7 @@ fun TextView.doBeforeTextChanged(
  * @see [TextWatcher.onTextChanged]
  */
 fun TextView.doOnTextChanged(
-    onChanged: (s: CharSequence, start: Int, before: Int, count: Int) -> Unit
+  onChanged: (s: CharSequence, start: Int, before: Int, count: Int) -> Unit
 ): TextWatcher = addTextChangedListener(onChanged = onChanged)
 
 /**
@@ -59,9 +59,9 @@ fun TextView.doOnTextChanged(
  * @see [TextWatcher.onTextChanged]
  */
 fun TextView.addTextChangedListener(
-    beforeChanged: ((s: CharSequence, start: Int, count: Int, after: Int) -> Unit)? = null,
-    afterChanged: ((Editable) -> Unit)? = null,
-    onChanged: ((s: CharSequence, start: Int, before: Int, count: Int) -> Unit)? = null
+  beforeChanged: ((s: CharSequence, start: Int, count: Int, after: Int) -> Unit)? = null,
+  afterChanged: ((Editable) -> Unit)? = null,
+  onChanged: ((s: CharSequence, start: Int, before: Int, count: Int) -> Unit)? = null
 ): TextWatcher {
   val watcher = object : TextWatcher {
     override fun afterTextChanged(s: Editable) {

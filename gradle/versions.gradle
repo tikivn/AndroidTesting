@@ -1,0 +1,97 @@
+ext.buildConfig = [
+    'minSdk'    : 17,
+    'compileSdk': 27,
+    'targetSdk' : 27,
+]
+
+def deps = [
+    'constraintLayout': "com.android.support.constraint:constraint-layout:1.1.2",
+    'processphoenix'  : "com.jakewharton:process-phoenix:2.0.0",
+    'picasso'         : "com.squareup.picasso:picasso:2.71828",
+    'libphonenumber'  : "com.googlecode.libphonenumber:libphonenumber:7.4.4",
+    'gson'            : "com.google.code.gson:gson:2.8.0",
+]
+
+def kotlinVersion = '1.2.50'
+deps.kotlin = [
+    'gradle' : "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion",
+    'std'    : "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlinVersion",
+    'allopen': "org.jetbrains.kotlin:kotlin-allopen:$kotlinVersion",
+    'ktx'    : "androidx.core:core-ktx:0.3",
+]
+
+def coroutinesVersion = '0.22.5'
+deps.coroutines = [
+    'core'   : "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutinesVersion",
+    'android': "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutinesVersion",
+]
+
+ext.supportVersion = '27.1.1'
+deps.support = [
+    'v4'          : "com.android.support:support-v4:$supportVersion",
+    'appcompat'   : "com.android.support:appcompat-v7:$supportVersion",
+    'design'      : "com.android.support:design:$supportVersion",
+    'recyclerview': "com.android.support:recyclerview-v7:$supportVersion",
+    'annotations' : "com.android.support:support-annotations:$supportVersion",
+]
+
+deps.tiki = [
+    'di'         : "vn.tiki.android:di:1.0.0",
+    'collection' : "vn.tiki.android:collection:1.0.0",
+    'collectionx': "vn.tiki.android:collectionx:1.0.0",
+]
+
+def leakCanaryVersion = '1.5.4'
+deps.leakcanary = [
+    'core': "com.squareup.leakcanary:leakcanary-android:$leakCanaryVersion",
+    'noOp': "com.squareup.leakcanary:leakcanary-android-no-op:$leakCanaryVersion",
+]
+
+def okhttpVersion = "3.10.0"
+deps.okhttp = [
+    'core'              : "com.squareup.okhttp3:okhttp:$okhttpVersion",
+    'urlconnection'     : "com.squareup.okhttp3:okhttp-urlconnection:$okhttpVersion",
+    'loggingintercepter': "com.squareup.okhttp3:logging-interceptor:$okhttpVersion",
+]
+
+def retrofitVersion = "2.4.0"
+deps.retrofit = [
+    'core'     : "com.squareup.retrofit2:retrofit:$retrofitVersion",
+    'converter': "com.squareup.retrofit2:converter-gson:$retrofitVersion",
+    'adapter'  : "com.squareup.retrofit2:adapter-rxjava2:$retrofitVersion",
+]
+
+def espressoVersion = "3.0.2"
+
+def supportTestVersion = "1.0.2"
+deps.supportTest = [
+    'runner'         : "com.android.support.test:runner:$supportTestVersion",
+    'rules'          : "com.android.support.test:rules:$supportTestVersion",
+    'espressoCore'   : "com.android.support.test.espresso:espresso-core:$espressoVersion",
+    'espressoContrib': "com.android.support.test.espresso:espresso-contrib:$espressoVersion",
+]
+
+def robolectricVersion = "3.8"
+deps.test = [
+    'junit'         : "junit:junit:4.12",
+    'truth'         : "com.google.truth:truth:0.41",
+    'mockito'       : "org.mockito:mockito-core:2.19.0",
+    'mockitoAndroid': "org.mockito:mockito-android:2.18.3",
+    'robolectric'   : [
+        'core'   : "org.robolectric:robolectric:$robolectricVersion",
+        'shadows': "org.robolectric:shadows-supportv4:$robolectricVersion",
+    ],
+]
+
+def lifecycleVersion = "1.1.1"
+def navVersion = "1.0.0-alpha01"
+deps.lifecycle = [
+    'extensions' : "android.arch.lifecycle:extensions:$lifecycleVersion",
+    'coreTesting': "android.arch.core:core-testing:$lifecycleVersion",
+    'nav'        : [
+        'fragment': "android.arch.navigation:navigation-fragment-ktx:$navVersion",
+        'ui'      : "android.arch.navigation:navigation-ui-ktx:$navVersion",
+    ]
+]
+
+ext.deps = deps
